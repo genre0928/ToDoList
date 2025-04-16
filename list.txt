@@ -1,0 +1,6 @@
+dnd 라이브러리 : https://www.npmjs.com/package/@hello-pangea/dnd
+
+코드챌린지
+1. localstorage에 저장
+2. task 삭제 버튼 | 쓰레기통에 버리기
+3. 직접 보드 생성
