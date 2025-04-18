@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { IToDo, toDoState } from "../atoms";
 import { useSetRecoilState } from "recoil";
-import { useEffect } from "react";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -29,8 +28,8 @@ const Title = styled.h2`
 `;
 
 interface IAreaProps {
-  isDraggingOver: boolean;
-  isDraggingFromThis: boolean;
+  $isDraggingOver: boolean;
+  $isDraggingFromThis: boolean;
 }
 
 const Form = styled.form`
@@ -42,9 +41,9 @@ const Form = styled.form`
 
 const Area = styled.div<IAreaProps>`
   background-color: ${(props) =>
-    props.isDraggingOver
+    props.$isDraggingOver
       ? "#def6e9"
-      : props.isDraggingFromThis
+      : props.$isDraggingFromThis
       ? "#b2bec3"
       : "transparent"};
   flex-grow: 1;
@@ -57,9 +56,6 @@ interface IForm {
 }
 
 function Board({ toDos, boardId }: IBoardProps) {
-  useEffect(() => {
-    console.log(toDos);
-  }, [toDos]);
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
@@ -88,8 +84,8 @@ function Board({ toDos, boardId }: IBoardProps) {
       <Droppable droppableId={boardId}>
         {(magic, info) => (
           <Area
-            isDraggingOver={info.isDraggingOver}
-            isDraggingFromThis={Boolean(info.draggingFromThisWith)}
+            $isDraggingOver={info.isDraggingOver}
+            $isDraggingFromThis={Boolean(info.draggingFromThisWith)}
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
@@ -99,6 +95,7 @@ function Board({ toDos, boardId }: IBoardProps) {
                 index={index}
                 toDoId={toDo.id}
                 toDoText={toDo.text}
+                boardId={boardId}
               />
             ))}
             {magic.placeholder}
