@@ -1,52 +1,39 @@
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { toDoState } from "../atoms";
 
-const CardWrapper = styled.div`
-
-width: 300px;
-  padding-top: 10px;
-  background-color: ${(props) => props.theme.boardColor};
-  border-radius: 5px;
-  min-height: 200px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: white;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const Circle = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 3px solid black;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PlusIcon = styled.span`
+const AddButton = styled.button`
+  border: none;
+  color: rgba(0, 0, 0, 1);
   font-size: 32px;
   font-weight: bold;
   line-height: 1;
+  cursor: pointer;
+  &:hover {
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease-in-out;
+  }
 `;
 
 function CreateBoard() {
-  return (
-    <CardWrapper>
-      <Circle>
-        <PlusIcon>+</PlusIcon>
-      </Circle>
-    </CardWrapper>
-  );
+  const setToDos = useSetRecoilState(toDoState);
+  const AddCard = () => {
+    const newBoardId = prompt("새 보드 이름을 입력하세요");
+    if (!newBoardId) return;
+
+    setToDos((allBoards) => {
+      if (allBoards[newBoardId]) {
+        alert("이미 존재하는 보드입니다.");
+        return allBoards;
+      }
+      return {
+        ...allBoards,
+        [newBoardId]: [],
+      };
+    });
+    console.log("추가한덩");
+  };
+  return <AddButton onClick={AddCard}>+</AddButton>;
 }
 
 export default CreateBoard;

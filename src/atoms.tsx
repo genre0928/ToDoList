@@ -31,9 +31,9 @@ const localStorageEffect =
 export const toDoState = atom<IToDoState>({
   key: "toDoState",
   default: {
-    To_Do: [],
-    Doing: [],
-    Done: [],
+    "해야할 일": [],
+    "진행중": [],
+    "완료": [],
   },
   effects_UNSTABLE: [localStorageEffect(localStorageKey)],
 });

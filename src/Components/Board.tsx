@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { IToDo, toDoState } from "../atoms";
 import { useSetRecoilState } from "recoil";
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: 300px;
   padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
@@ -78,7 +78,7 @@ function Board({ toDos, boardId }: IBoardProps) {
         <input
           {...register("toDo", { required: true })}
           type="text"
-          placeholder={`Add to task for ${boardId}`}
+          placeholder={boardId == "완료" ? "" : ` ${boardId} 작성하기`}
         />
       </Form>
       <Droppable droppableId={boardId}>

@@ -1,8 +1,8 @@
 import { Draggable } from "@hello-pangea/dnd";
 import React from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { IToDoState, localStorageKey, toDoState } from "../atoms";
+import { IToDoState, toDoState } from "../atoms";
 
 const Wrapper = styled.div`
   position: relative;

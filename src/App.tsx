@@ -3,10 +3,11 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./Components/Board";
+import CreateBoard from "./Components/CreateBoard";
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 680px;
+  max-width: 920px;
   width: 100%;
   margin: 0 auto;
   justify-content: center;
@@ -14,8 +15,9 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-const Boards = styled.div`
+export const Boards = styled.div`
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   width: 100%;
@@ -24,7 +26,7 @@ const Boards = styled.div`
 function App() {
   // atoms로 관리하는 상태명(toDoState)을 읽기 및 쓸 수 있는 훅
   const [toDos, setToDos] = useRecoilState(toDoState);
-  // 드래그가 끝난 후 실행할 함수수
+  // 드래그가 끝난 후 실행할 함수
   const onDragEnd = (info: DropResult) => {
     const { destination, source } = info;
     if (!destination) return;
@@ -63,10 +65,11 @@ function App() {
         <Boards>
           {/* toDoState atoms의 default 값을 읽어서 toDos에 저장 */}
           {/* boardID는 To_Do, Doing, Done 뜻 */}
-          {Object.keys(toDos).map((boardId) => (
+          {[...Object.keys(toDos).map((boardId) => (
             <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
-          ))}
+          )),<CreateBoard key="create"/>]}
         </Boards>
+        {/* <CreateBoard /> */}
       </Wrapper>
     </DragDropContext>
   );
