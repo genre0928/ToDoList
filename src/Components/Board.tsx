@@ -7,7 +7,6 @@ import { useSetRecoilState } from "recoil";
 
 export const Wrapper = styled.div`
   width: 300px;
-  padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
   border-radius: 5px;
   min-height: 200px;
@@ -21,6 +20,7 @@ interface IBoardProps {
 }
 
 const Title = styled.h2`
+  padding-top: 10px;
   text-align: center;
   font-weight: 600;
   margin-bottom: 10px;
@@ -34,8 +34,15 @@ interface IAreaProps {
 
 const Form = styled.form`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   input {
-    width: 100%;
+    border: none;
+    width: 95%;
+    outline: none;
+    border-radius: 10px;
+    padding: 4px 0 4px 8px;
   }
 `;
 

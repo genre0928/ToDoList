@@ -1,9 +1,12 @@
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "../atoms";
+import { Wrapper } from "./Board";
 
 const AddButton = styled.button`
   border: none;
+  height: 100%;
+  background: none;
   color: rgba(0, 0, 0, 1);
   font-size: 32px;
   font-weight: bold;
@@ -33,7 +36,11 @@ function CreateBoard() {
     });
     console.log("추가한덩");
   };
-  return <AddButton onClick={AddCard}>+</AddButton>;
+  return (
+    <Wrapper>
+      <AddButton onClick={AddCard}>+</AddButton>
+    </Wrapper>
+  );
 }
 
 export default CreateBoard;

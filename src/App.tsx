@@ -15,7 +15,16 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-export const Boards = styled.div`
+const BoardTitle = styled.h2`
+  display: flex;
+  justify-content: center;
+  max-width: 920px;
+  font-size: 50px;
+  margin: 0 auto;
+  margin-top: 10px;
+`;
+
+const Boards = styled.div`
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
@@ -61,13 +70,17 @@ function App() {
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <BoardTitle>To Do List</BoardTitle>
       <Wrapper>
         <Boards>
           {/* toDoState atoms의 default 값을 읽어서 toDos에 저장 */}
           {/* boardID는 To_Do, Doing, Done 뜻 */}
-          {[...Object.keys(toDos).map((boardId) => (
-            <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
-          )),<CreateBoard key="create"/>]}
+          {[
+            ...Object.keys(toDos).map((boardId) => (
+              <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
+            )),
+            <CreateBoard key="create" />,
+          ]}
         </Boards>
         {/* <CreateBoard /> */}
       </Wrapper>
